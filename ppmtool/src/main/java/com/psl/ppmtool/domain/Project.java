@@ -11,6 +11,14 @@ import javax.persistence.PreUpdate;
 
 @Entity
 public class Project {
+	@Override
+	public String toString() {
+		return "Project [id=" + id + ", projectName=" + projectName
+				+ ", projectIdentifier=" + projectIdentifier + ", description="
+				+ description + ", start_date=" + start_date + ", end_date="
+				+ end_date + ", created_At=" + created_At + ", updated_At="
+				+ updated_At + "]";
+	}
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
