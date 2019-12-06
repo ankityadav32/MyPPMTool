@@ -2,32 +2,39 @@ package com.psl.ppmtool.domain;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class Project {
-	@Override
-	public String toString() {
-		return "Project [id=" + id + ", projectName=" + projectName
-				+ ", projectIdentifier=" + projectIdentifier + ", description="
-				+ description + ", start_date=" + start_date + ", end_date="
-				+ end_date + ", created_At=" + created_At + ", updated_At="
-				+ updated_At + "]";
-	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+	@NotBlank(message="Project name is required")
 	private String projectName;
+	@NotBlank(message="Project identifier is required")
+	@Size(min=4,max=5,message="Please use 4 to 5 characters")
+	@Column(updatable=false,unique=true)
 	private String projectIdentifier;
+	@NotBlank(message="description cannot be empty")
 	private String description;
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date start_date;
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date end_date;
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date created_At;
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date updated_At	;
 	 public Project() {
 		// TODO Auto-generated constructor stub
@@ -105,5 +112,12 @@ public class Project {
 	void onUpdate(){
 		this.updated_At = new Date();
 	}
-
+	@Override
+	public String toString() {
+		return "Project [id=" + id + ", projectName=" + projectName
+				+ ", projectIdentifier=" + projectIdentifier + ", description="
+				+ description + ", start_date=" + start_date + ", end_date="
+				+ end_date + ", created_At=" + created_At + ", updated_At="
+				+ updated_At + "]";
+	}
 }
