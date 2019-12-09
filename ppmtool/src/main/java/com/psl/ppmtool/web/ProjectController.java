@@ -1,11 +1,16 @@
 package com.psl.ppmtool.web;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,9 +27,13 @@ public class ProjectController {
 	
 	@PostMapping("")
 	public ResponseEntity<?> save0rUpdate(@Valid @RequestBody Project p,BindingResult res){
+		Map<String,String> errorMap = new HashMap<String, String>();
+		for(FieldError field:res.getFieldErrors()){
+			errorMap.put(field.getField(),field.getDefaultMessage());
+		}
 		
 		if(res.hasErrors()){
-			return new ResponseEntity<String>("Invalid Project Object",HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Map<String,String>>(errorMap,HttpStatus.BAD_REQUEST);
 		}
 		ps.save0rupdate(p);
 		return new ResponseEntity<Project>(p, HttpStatus.OK);
