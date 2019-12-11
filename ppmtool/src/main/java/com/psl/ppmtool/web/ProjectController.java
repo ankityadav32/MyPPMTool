@@ -30,7 +30,7 @@ public class ProjectController {
 	
 	@PostMapping("")
 	public ResponseEntity<?> save0rUpdate(@Valid @RequestBody Project p,BindingResult res){
-		 ResponseEntity<?> err = errorvalidator.MapErrorValidate(res);
+		 ResponseEntity<?> err = errorvalidator.MapErrorValidate(res);System.out.println(res.getFieldErrors());
 		 if(err!=null) return err;
 		ps.save0rupdate(p);
 		return new ResponseEntity<Project>(p, HttpStatus.OK);
