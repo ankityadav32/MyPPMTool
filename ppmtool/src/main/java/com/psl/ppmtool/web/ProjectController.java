@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,10 +32,15 @@ public class ProjectController {
 	
 	@PostMapping("")
 	public ResponseEntity<?> save0rUpdate(@Valid @RequestBody Project p,BindingResult res){
-		 ResponseEntity<?> err = errorvalidator.MapErrorValidate(res);System.out.println(res.getFieldErrors());
+		 ResponseEntity<?> err = errorvalidator.MapErrorValidate(res);
 		 if(err!=null) return err;
 		ps.save0rupdate(p);
 		return new ResponseEntity<Project>(p, HttpStatus.OK);
+	}
+	@GetMapping("/{projectId}")
+	public ResponseEntity<?> FindProjectID(@PathVariable String projectId){
+		 Project project = ps.findProjectByid(projectId);
+		return new ResponseEntity<Project>(project,HttpStatus.OK);
 	}
 	
 
