@@ -8,4 +8,6 @@ import com.psl.ppmtool.domain.Project;
 @Repository
 public interface ProjectRepository extends CrudRepository<Project,Long> {
 	Project findByProjectIdentifier(String ProjectId);
+	@Override
+	public Iterable<Project> findAll();
 }
