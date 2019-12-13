@@ -1,10 +1,13 @@
 package com.psl.ppmtool.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.psl.ppmtool.domain.Project;
 import com.psl.ppmtool.exceptions.ProjectIdException;
+import com.psl.ppmtool.exceptions.ProjectListException;
 import com.psl.ppmtool.repositories.ProjectRepository;
 
 @Service
@@ -31,7 +34,12 @@ public class ProjectService {
 		
 	}
 	public Iterable<Project>findAllProjects(){
-		return pr.findAll();
+		
+		 Iterable<Project> projectList= pr.findAll();
+		 if(projectList != null){
+			 throw new ProjectListException("Projects not found");
+		 }
+		 return projectList;
 	}
 
 }
