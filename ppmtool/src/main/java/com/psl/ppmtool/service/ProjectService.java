@@ -36,10 +36,17 @@ public class ProjectService {
 	public Iterable<Project>findAllProjects(){
 		
 		 Iterable<Project> projectList= pr.findAll();
-		 if(projectList != null){
+		 if(projectList == null){
 			 throw new ProjectListException("Projects not found");
 		 }
 		 return projectList;
 	}
-
+	public void deleteByProjectIdentifier(String projectId) {
+		 Project project= pr.findByProjectIdentifier(projectId.toUpperCase());
+		if (project==null) {
+			throw new ProjectIdException("ProjectID "+projectId+" not available to delete");
+		}
+		pr.delete(project);
+	}
+	
 }
