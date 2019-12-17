@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 class Dashboard extends Component {
     render() {
         return (
+
             <div className="projects">
         <div className="container">
             <div className="row">
@@ -19,7 +20,7 @@ class Dashboard extends Component {
                 </div>
             </div>
         </div>
-    </div>
+    </div>    
         );
     }
 }
