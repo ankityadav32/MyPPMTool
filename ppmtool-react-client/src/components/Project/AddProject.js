@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import { timingSafeEqual } from 'crypto';
 
 class AddProject extends Component {
@@ -56,9 +57,4 @@ class AddProject extends Component {
             </div>
         </div>
     </div>
-           
-        );
-    }
-}
-
 export default AddProject;
