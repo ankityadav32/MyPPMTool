@@ -19,9 +19,4 @@ else{
 }
     
 
-
-
-
-
-
 export default store;

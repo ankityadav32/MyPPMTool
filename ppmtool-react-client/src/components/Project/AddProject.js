@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { timingSafeEqual } from 'crypto';
+import {connect} from 'react-redux'
+import Proptypes from 'prop-types'
+import {createProject} from '../../actions/projectActions'
 
 class AddProject extends Component {
     constructor(){
@@ -19,7 +21,14 @@ class AddProject extends Component {
 
     onSubmit = (e) =>{
         e.preventDefault();
-        console.log(this.state)
+        const newProject={
+            "projectName": this.state.projectName,
+            "projectIdentifier": this.state.projectIdentifier,
+            "description": this.state.description,
+            "start_date": this.state.start_date,
+            "end_date": this.state.end_date
+        }
+        this.props.createProject(newProject,this.props.history)
     }
     render() {
         return (
@@ -61,4 +70,7 @@ class AddProject extends Component {
     }
 }
 
-export default AddProject;
+AddProject.propTypes = {
+    createProject : Proptypes.func.isRequired
+};
+export default connect (null,{createProject })(AddProject);
