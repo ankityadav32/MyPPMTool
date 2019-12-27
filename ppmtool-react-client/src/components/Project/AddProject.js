@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import {connect} from 'react-redux'
 import Proptypes from 'prop-types'
 import {createProject} from '../../actions/projectActions'
@@ -98,8 +99,10 @@ AddProject.propTypes = {
     createProject : Proptypes.func.isRequired,
     errors : Proptypes.object.isRequired
 };
+
 const mapStateToProps = (state) =>{
    return {errors:state.errors}
 }
 
 export default connect (mapStateToProps,{createProject })(AddProject);
+
